@@ -35,9 +35,5 @@ int main() {
             }
         }
     }
-    
-    if (iNumero == 1)
-        iSuma++;
-    
     cout << iNumero << " = " << iSuma << endl;
 }
