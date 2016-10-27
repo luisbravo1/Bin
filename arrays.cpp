@@ -1,5 +1,41 @@
 /*
 Luis Gerardo Bravo Ramones A01282014
+
+Casos de prueba:
+
+Ingresa el tamaño del arreglo
+5
+Ingresar numero 1: 1
+Ingresar numero 2: 2
+Ingresar numero 3: 3
+Ingresar numero 4: 4
+Ingresar numero 5: 5
+Ingresa el limite inferior: 2
+Ingresa el limite superior: 4
+Los numeros dentro de los limites son:
+2
+3
+4
+El tamaño del arreglo final es: 3
+
+Ingresa el tamaño del arreglo
+8
+Ingresar numero 1: 10
+Ingresar numero 2: 40
+Ingresar numero 3: 20
+Ingresar numero 4: 23
+Ingresar numero 5: 40
+Ingresar numero 6: 56
+Ingresar numero 7: 67
+Ingresar numero 8: 70
+Ingresa el limite inferior: 40
+Ingresa el limite superior: 69
+Los numeros dentro de los limites son:
+40
+40
+56
+67
+El tamaño del arreglo final es: 4
 */
 
 #include <iostream>
