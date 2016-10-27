@@ -36,27 +36,27 @@ Los valores son:
 using namespace std;
 
 //Funcion que lee la cantidad de datos para el arreglo
-void leeDatos (int dArrNum[], int n) 
+void leeDatos (int iArrNum[], int n) 
 {
 	for (int i=0; i < n; i++) 
 	{
 		cout << "Ingresar numero " << i+1 << ": ";
-		cin >> dArrNum[i];
+		cin >> iArrNum[i];
 
-		while ((dArrNum[i] <= dArrNum[i-1]) || (dArrNum[i] < 0) || (dArrNum[i] > 100)) //Para verificar que el numero no sea menor al anterior
+		while ((iArrNum[i] <= iArrNum[i-1]) || (iArrNum[i] < 0) || (iArrNum[i] > 100)) //Para verificar que el numero no sea menor al anterior
 		{
 			cout << "Error, porfavor ingresa un numero valido" << endl;
 			cout << "Ingresar numero " << i+1 << ": ";
-			cin >> dArrNum[i];
+			cin >> iArrNum[i];
 		}
 	}
 }
 
-void mostrarDatos (int dArrNum[], int n)
+void mostrarDatos (int iArrNum[], int n)
 {
 	for (int i=0; i < n; i++)
 	{
-		cout << dArrNum[i] << endl;
+		cout << iArrNum[i] << endl;
 	}
 }
 
