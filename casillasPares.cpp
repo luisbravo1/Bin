@@ -12,13 +12,11 @@ void leeDatos (int iArrNum[], int iTam)
 
 void casillasPares (int iArrA[], int iTamA, int iArrB[], int &iTamB)
 {
-	for (int i=0; i < iTamA; i++) 
+	iTamB = 0;
+	for (int i=0; i < iTamA; i += 2) 
 	{
-		if (i % 2 == 0)
-		{
-			iArrB[iTamB] = iArrA[i];
-			iTamB++;
-		}
+		iArrB[iTamB] = iArrA[i];
+		iTamB++;
 	}
 }
 
@@ -32,7 +30,7 @@ void mostrarDatos (int iArrNum[], int iTam)
 
 int main()
 {
-	int iArrA[20], iTamA, iArrB[20], iTamB = 0;
+	int iArrA[20], iTamA, iArrB[20], iTamB;
 
 	cout << "Cuantos elementos usara? ";
 	cin >> iTamA;
