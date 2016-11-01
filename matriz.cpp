@@ -3,18 +3,24 @@ using namespace std;
 
 int main() 
 {
-	int iMatNum[2][3];
+	int iMatNum[10][10];
+	int iSizeR, iSizeC;
 
-	for (int reng=0; reng < 2; reng++) {
-		for (int col=0; col < 3; col++)
+	cout << "Cuantos renglones: ";
+	cin >> iSizeR;
+	cout << "Cuantas columnas: ";
+	cin >> iSizeC;
+
+	for (int reng=0; reng < iSizeR; reng++) {
+		for (int col=0; col < iSizeC; col++)
 		{
 			cout << "Ingresa dato (" << reng << "," << col << ")";
 			cin >> iMatNum[reng][col];
 		}
 	}
 
-	for (int reng=0; reng < 2; reng++) {
-		for (int col=0; col < 3; col++)
+	for (int reng=0; reng < iSizeR; reng++) {
+		for (int col=0; col < iSizeC; col++)
 		{
 			cout << iMatNum[reng][col];
 		}
