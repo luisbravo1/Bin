@@ -20,10 +20,12 @@ int main()
 	}
 
 	for (int reng=0; reng < iSizeR; reng++) {
+
 		for (int col=0; col < iSizeC; col++)
 		{
-			cout << iMatNum[reng][col];
+			cout << iMatNum[reng][col] << " ";
 		}
+		cout << endl;
 	}
 
 	return 0;
