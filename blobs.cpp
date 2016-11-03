@@ -14,7 +14,7 @@ void mostrarTablero (char MatTablero[6][6]) //Muestra el tablero cada turno
 
 }
 
-void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool &seleccion) //Lee los datos de seleccion y de movimiento del jugador
+void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool &seleccion) //Lee los datos de seleccion
 {
 
 	cout << "Jugador 1 X" << endl;
@@ -33,7 +33,7 @@ void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool &se
 	}
 }
 
-void movimiento (int selecRen, int selecCol, bool seleccion, char MatTablero[6][6])
+void movimiento (int selecRen, int selecCol, bool seleccion, char MatTablero[6][6]) //Mueve al jugador
 {
 	char destino;
 
@@ -44,28 +44,36 @@ void movimiento (int selecRen, int selecCol, bool seleccion, char MatTablero[6][
 
 	switch (destino){
 		case 'a':
-			MatTablero[selecRen][selecCol-1] = 'X';
+			if (MatTablero[selecRen][selecCol-1] == '_')
+				MatTablero[selecRen][selecCol-1] = 'X';
 			break;
 		case 'x':
-			MatTablero[selecRen+1][selecCol] = 'X';
+			if (MatTablero[selecRen+1][selecCol] == '_')
+				MatTablero[selecRen+1][selecCol] = 'X';
 			break;
 		case 'w':
-			MatTablero[selecRen-1][selecCol] = 'X';
+			if (MatTablero[selecRen-1][selecCol] == '_')
+				MatTablero[selecRen-1][selecCol] = 'X';
 			break;
 		case 'd':
-			MatTablero[selecRen][selecCol+1] = 'X';
+			if (MatTablero[selecRen][selecCol+1] == '_')
+				MatTablero[selecRen][selecCol+1] = 'X';
 			break;
 		case 'q':
-			MatTablero[selecRen-1][selecCol-1] = 'X';
+			if (MatTablero[selecRen-1][selecCol-1] == '_')
+				MatTablero[selecRen-1][selecCol-1] = 'X';
 			break;
 		case 'e':
-			MatTablero[selecRen-1][selecCol+1] = 'X';
+			if (MatTablero[selecRen-1][selecCol+1] == '_')
+				MatTablero[selecRen-1][selecCol+1] = 'X';
 			break;
 		case 'z':
-			MatTablero[selecRen+1][selecCol-1] = 'X';
+			if (MatTablero[selecRen+1][selecCol-1] == '_')
+				MatTablero[selecRen+1][selecCol-1] = 'X';
 			break;
 		case 'c':
-			MatTablero[selecRen+1][selecCol+1] = 'X';
+			if (MatTablero[selecRen+1][selecCol+1] == '_')
+				MatTablero[selecRen+1][selecCol+1] = 'X';
 			break;
 	}
 }
