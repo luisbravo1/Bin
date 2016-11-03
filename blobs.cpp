@@ -14,7 +14,7 @@ void mostrarTablero (char MatTablero[6][6]) //Muestra el tablero cada turno
 
 }
 
-void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool &seleccion) //Lee los datos de seleccion
+void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool seleccion) //Lee los datos de seleccion
 {
 
 	cout << "Jugador 1 X" << endl;
@@ -78,19 +78,37 @@ void movimiento (int selecRen, int selecCol, bool seleccion, char MatTablero[6][
 	}
 }
 
+void seguirJugando (bool &continuar)
+{
+	char respuesta;
+
+	do {
+		cout << "Seguir (s/n) ->";
+		cin >> respuesta;
+
+		respuesta = tolower(respuesta);
+
+		if (respuesta == 'n')
+			continuar = false;
+
+	} while ((respuesta != 'n') && (respuesta != 's'));
+}
 
 int main() 
 {
 	char MatTablero[6][6] = {{'0','1','2','3','4','5'},{'1','X','_','_','_','X'},{'2','_','_','_','_','_'},\
 	{'3','_','_','_','_','_'},{'4','_','_','_','_','_'},{'5','O','_','_','_','O'}};
 	int selecRen, selecCol;
-	bool seleccion = false;
+	bool seleccion = false, continuar = true, player1 = true;
 
-
-	mostrarTablero(MatTablero);
-	leeSeleccion(MatTablero, selecRen, selecCol, seleccion);
-	movimiento(selecRen, selecCol, seleccion, MatTablero);
-	mostrarTablero(MatTablero);
+	do {
+		mostrarTablero(MatTablero);
+		leeSeleccion(MatTablero, selecRen, selecCol, seleccion);
+		movimiento(selecRen, selecCol, seleccion, MatTablero);
+		mostrarTablero(MatTablero);
+		seguirJugando(continuar);
+		player1 = !player1;
+	} while (continuar == true);
 
 	return 0;
 }
