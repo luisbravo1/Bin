@@ -2,11 +2,20 @@
 using namespace std;
 
 
-
-void leeDatos (char MatTablero[6][6]) //Lee los datos de seleccion y de movimiento del jugador
+void mostrarTablero (char MatTablero[6][6]) //Muestra el tablero cada turno
 {
-	int selecRen, selecCol;
-	bool seleccion = false;
+	for (int reng=0; reng < 6; reng++) {
+		for (int col=0; col < 6; col++)
+		{
+			cout << MatTablero[reng][col] << "\t";
+		}
+		cout << endl;
+	}
+
+}
+
+void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool &seleccion) //Lee los datos de seleccion y de movimiento del jugador
+{
 
 	cout << "Jugador 1 X" << endl;
 
@@ -22,33 +31,58 @@ void leeDatos (char MatTablero[6][6]) //Lee los datos de seleccion y de movimien
 			seleccion = false;
 		}
 	}
+}
+
+void movimiento (int selecRen, int selecCol, bool seleccion, char MatTablero[6][6])
+{
+	char destino;
 
 	cout << "a - izq	x - aba		w - arr		d - der" << endl;
 	cout << "q - arriba a la izq	e - arriba a la der" << endl;
 	cout << "z - abajo a la izq	c - abajo a la der" << endl;
+	cin >> destino;
 
-}
-
-
-void mostrarTablero (char MatTablero[6][6]) //Muestra el tablero cada turno
-{
-	for (int reng=0; reng < 6; reng++) {
-		for (int col=0; col < 6; col++)
-		{
-			cout << MatTablero[reng][col] << "\t";
-		}
-		cout << endl;
+	switch (destino){
+		case 'a':
+			MatTablero[selecRen][selecCol-1] = 'X';
+			break;
+		case 'x':
+			MatTablero[selecRen+1][selecCol] = 'X';
+			break;
+		case 'w':
+			MatTablero[selecRen-1][selecCol] = 'X';
+			break;
+		case 'd':
+			MatTablero[selecRen][selecCol+1] = 'X';
+			break;
+		case 'q':
+			MatTablero[selecRen-1][selecCol-1] = 'X';
+			break;
+		case 'e':
+			MatTablero[selecRen-1][selecCol+1] = 'X';
+			break;
+		case 'z':
+			MatTablero[selecRen+1][selecCol-1] = 'X';
+			break;
+		case 'c':
+			MatTablero[selecRen+1][selecCol+1] = 'X';
+			break;
 	}
-
 }
+
 
 int main() 
 {
 	char MatTablero[6][6] = {{'0','1','2','3','4','5'},{'1','X','_','_','_','X'},{'2','_','_','_','_','_'},\
 	{'3','_','_','_','_','_'},{'4','_','_','_','_','_'},{'5','O','_','_','_','O'}};
+	int selecRen, selecCol;
+	bool seleccion = false;
+
 
 	mostrarTablero(MatTablero);
-	leeDatos(MatTablero);
+	leeSeleccion(MatTablero, selecRen, selecCol, seleccion);
+	movimiento(selecRen, selecCol, seleccion, MatTablero);
+	mostrarTablero(MatTablero);
 
 	return 0;
 }
