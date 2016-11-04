@@ -36,8 +36,8 @@ void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool sel
 	}
 }
 
-void convertirBlobs (char MatTablero[6][6], int selecRen, int selecCol, char cPlayer, char cOpponent)
-{
+void convertirBlobs (char MatTablero[6][6], int selecRen, int selecCol, char cPlayer, char cOpponent) //Si hay algun enemigo en una casilla adyacente
+{																									  //lo captura
 	if (MatTablero[selecRen][selecCol-1] == cOpponent) 
 		(MatTablero[selecRen][selecCol-1] = cPlayer);
 
@@ -68,7 +68,7 @@ void movimiento (int &selecRen, int &selecCol, bool seleccion, char MatTablero[6
 	char destino;
 
 	do {
-	cout << "a - izq	x - aba		w - arr		d - der" << endl;
+	cout << "a - izq		x - aba		w - arr		d - der" << endl;
 	cout << "q - arriba a la izq	e - arriba a la der" << endl;
 	cout << "z - abajo a la izq	c - abajo a la der" << endl;
 	cin >> destino;
@@ -123,6 +123,32 @@ void movimiento (int &selecRen, int &selecCol, bool seleccion, char MatTablero[6
 	}
 }
 
+void ganador (char MatTablero[6][6], int &iPuntaje1, int &iPuntaje2, bool &continuar)
+{
+	iPuntaje1=0;
+	iPuntaje2=0;
+	int iCasillas=0;
+
+	for (int ren=0; ren < 6; ren++){
+		for (int col=0; col < 6; col++){
+			if (MatTablero[ren][col] != '_')
+				iCasillas++;
+		}
+	}
+
+	for (int ren=0; ren < 6; ren++){
+		for (int col=0; col < 6; col++){
+			if (MatTablero[ren][col] == 'X')
+				iPuntaje1++;
+			else if (MatTablero[ren][col] == 'O')
+				iPuntaje2++;
+		}
+	}
+
+	if (iCasillas == 36)
+		continuar = false;
+}
+
 void seguirJugando (bool &continuar) //Verifica si quiere seguir jugando el usuario
 {
 	char respuesta;
@@ -156,7 +182,7 @@ int main()
 {
 	char MatTablero[6][6] = {{'0','1','2','3','4','5'},{'1','X','_','_','_','X'},{'2','_','_','_','_','_'},\
 	{'3','_','_','_','_','_'},{'4','_','_','_','_','_'},{'5','O','_','_','_','O'}};
-	int selecRen, selecCol;
+	int selecRen, selecCol, iPuntaje1, iPuntaje2;
 	bool seleccion = false, continuar = true, player1 = true;
 	char cPlayer = 'X', cOpponent = cOpponent;
 
@@ -167,9 +193,17 @@ int main()
 		movimiento(selecRen, selecCol, seleccion, MatTablero, cPlayer);
 		convertirBlobs(MatTablero, selecRen, selecCol, cPlayer, cOpponent);
 		mostrarTablero(MatTablero);
+		ganador(MatTablero, iPuntaje1, iPuntaje2, continuar);
 		seguirJugando(continuar);
 		turnoJugador(player1, cPlayer, cOpponent);
 	} while (continuar == true);
+
+	if (iPuntaje1 > iPuntaje2)
+		cout << "Jugador 1 X gana (" << iPuntaje1 << ") vs Jugador 2 O (" << iPuntaje2 << ")" << endl;
+	else if (iPuntaje2 > iPuntaje1)
+		cout << "Jugador 2 O gana (" << iPuntaje2 << ") vs Jugador 1 X (" << iPuntaje1 << ")" << endl;
+	else if (iPuntaje1 == iPuntaje2)
+		cout << "Empate Jugador 1 X (" << iPuntaje1 << ") y Jugador 2 O (" << iPuntaje2 << ")" << endl;
 
 	return 0;
 }
