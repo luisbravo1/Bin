@@ -38,6 +38,7 @@ void leeSeleccion (char MatTablero[6][6], int &selecRen, int &selecCol, bool sel
 
 void convertirBlobs (char MatTablero[6][6], int selecRen, int selecCol, char cPlayer, char cOpponent) //Si hay algun enemigo en una casilla adyacente
 {																									  //lo captura
+	//Cuando se mueve a una casilla ocupada comoquiera convierte los del alrededor
 	if (MatTablero[selecRen][selecCol-1] == cOpponent) 
 		(MatTablero[selecRen][selecCol-1] = cPlayer);
 
