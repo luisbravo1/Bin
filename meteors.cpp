@@ -17,7 +17,6 @@ void randomMeteor(int number, char board[99][99]) {
 
 /*
 void copyRow () {
-
 	for()	
 }
 */
@@ -34,8 +33,8 @@ int main() {
 
 	char board[99][99] = { {" "} };
 
-//	while (stop != 'q') {
-//		system("clear");
+	while (stop != 'q') {
+		system("clear");
 
 		for (int a = 0; a < 15; a++){
 			randomMeteor(number, board);
@@ -48,13 +47,6 @@ int main() {
 		}
 			cout << endl;
 
-		for (int n = 0; n < 3; n++) {
-
-		board[row+1][number] = board[0][number];
-
-		}	
-//	}
-	
-
+	}
 
 }
