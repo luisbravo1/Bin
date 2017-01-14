@@ -4,22 +4,27 @@
 
 using namespace std;
 
-void randomMeteor(int number, char board[99][99]) {
-
+void randomMeteor(int number, char board[15][30]) {
 	for (int n = 0; n < 3; n++) {
-	number = rand() % 30;
-
-	board[0][number] = '*';
-
+		number = rand() % 30;
+		board[0][number] = '*';
 	}
-
 }
 
-/*
-void copyRow () {
-	for()	
+void copyRow (char board[15][30]) {
+	for (int a = 14; a > 0; a--) {
+		for (int b = 0; b < 30; b++) {
+			board[a][b] = board[a-1][b];
+		}
+	}
 }
-*/
+
+void eraseRow (char board[15][30]) {
+	for (int n = 0; n < 30; n++) {
+		board[0][n] = ' ';
+	}
+}
+
 
 int main() {
 
@@ -28,25 +33,27 @@ int main() {
 	int row;
 	int col;
 	int number;
-	int num1, num2, num3;
 	char stop;
 
-	char board[99][99] = { {" "} };
+	char board[15][30] = { {" "} };
 
-	while (stop != 'q') {
+	do {
 		system("clear");
 
+		randomMeteor(number, board);
 		for (int a = 0; a < 15; a++){
-			randomMeteor(number, board);
-
+			if (a==0)
+				cout << "X";
 			for (int b = 0; b < 30; b++){
 				cout << board[a][b] << " ";
-
 			}
 			cout << endl;
 		}
-			cout << endl;
 
-	}
+		copyRow(board);
+
+		eraseRow(board);
+
+	} while (stop != 'q');
 
 }
