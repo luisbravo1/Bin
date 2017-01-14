@@ -1,7 +1,10 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h> 
+#include <thread>
+#include <cstdlib>
 
+using namespace std::chrono;
 using namespace std;
 
 void randomMeteor(int number, char board[15][30]) {
@@ -37,13 +40,13 @@ int main() {
 
 	char board[15][30] = { {" "} };
 
+
 	do {
+
 		system("clear");
 
 		randomMeteor(number, board);
 		for (int a = 0; a < 15; a++){
-			if (a==0)
-				cout << "X";
 			for (int b = 0; b < 30; b++){
 				cout << board[a][b] << " ";
 			}
@@ -53,6 +56,8 @@ int main() {
 		copyRow(board);
 
 		eraseRow(board);
+
+		this_thread::sleep_for(milliseconds(100));
 
 	} while (stop != 'q');
 
