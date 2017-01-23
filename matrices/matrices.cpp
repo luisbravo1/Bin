@@ -14,69 +14,80 @@ int main() {
 	int iTam;
 	archivoEntrada >> iTam;
 
+	ofstream archivoSalida;
+	archivoSalida.open("resultados.txt");
+
 //Asignar valores para matriz A
 	int iValor;
-	for(int row=0; row < iTam; row++) {
+	archivoSalida << "Matriz A" << endl;
+ 	for(int row=0; row < iTam; row++) {
 		for(int col=0; col < iTam; col++) {
 			archivoEntrada >> iValor;
 			iMatA[row][col] = iValor;
-			cout << iMatA[row][col];	
+			archivoSalida << iMatA[row][col];	
 		}
-		cout << endl;
+		archivoSalida << endl;
 	}
+	archivoSalida << endl;
 
 //Asignar valores para matriz B
 	archivoEntrada >> iTam;
-
+	archivoSalida << "Matriz B" << endl;
 	for(int row=0; row < iTam; row++) {
 		for(int col=0; col < iTam; col++) {
 			archivoEntrada >> iValor;
 			iMatB[row][col] = iValor;
-			cout << iMatB[row][col];	
+			archivoSalida << iMatB[row][col];	
 		}
-		cout << endl;
+		archivoSalida << endl;
 	}
+	archivoSalida << endl;
 
 //Suma de matrices
+	archivoSalida << "Suma" << endl;
 	for(int row=0; row < iTam; row++) {
 		for(int col=0; col < iTam; col++) {
 			iMatC[row][col] = iMatA[row][col] + iMatB[row][col];
-			cout << iMatC[row][col];
+			archivoSalida << iMatC[row][col];
 		}
-		cout << endl;
+		archivoSalida << endl;
 	}
+	archivoSalida << endl;
 
 
 //Resta de matrices
+	archivoSalida << "Resta" << endl;
 	for(int row=0; row < iTam; row++) {
 		for(int col=0; col < iTam; col++) {
 			iMatC[row][col] = iMatA[row][col] - iMatB[row][col];
-			cout << iMatC[row][col];
+			archivoSalida << iMatC[row][col];
 		}
-		cout << endl;
+		archivoSalida << endl;
 	}
+	archivoSalida << endl;
 
 //Transpuesta de matrices
+	archivoSalida << "Transpuesta" << endl;
 	for(int row=0; row < iTam; row++) {
 		for(int col=0; col < iTam; col++) {
 			iMatC[row][col] = iMatA[col][row];
-			cout << iMatC[row][col];
+			archivoSalida << iMatC[row][col];
 		}
-		cout << endl;
+		archivoSalida << endl;
 	}
+	archivoSalida << endl;
 
 //Multiplicacion de matrices
-	int iSuma;
+	archivoSalida << "Multiplicacion" << endl;
 	for(int row=0; row < iTam; row++) {
-		iSuma = 0;
 		for(int col=0; col < iTam; col++) {
-			iSuma = iMatA[row][col] * iMatB[col][row]; 
-			iSuma += iSuma;
-
-			iMatC[row][col] = iSuma;
-			
+			iMatC[row][col] = 0;
+			for(int c = 0; c < iTam; c++) {
+				iMatC[row][col] += iMatA[row][c] * iMatB[c][col]; 
+			}
+			archivoSalida << iMatC[row][col] << " ";
 		}
-		cout << iSuma << endl;
+		archivoSalida << endl;
 	}
 
 	archivoEntrada.close();
