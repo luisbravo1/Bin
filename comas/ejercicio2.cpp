@@ -9,29 +9,34 @@ int main() {
 	ifstream archivoEntrada;
 	archivoEntrada.open("calificaciones.txt");
 
+	ofstream archivoSalida;
+	archivoSalida.open("promedios.txt");
+
 	string sMatricula;
-	int iTrabajos, iCalificacion;
+	int iTrabajos, iCalificacion, iEntregados;
 	double dSuma, dPromedio;
+
+	cout << "Cuantos trabajos son? ";
+	cin >> iTrabajos;
 
 	while (!archivoEntrada.eof()) {
 		sMatricula = "";
-		iTrabajos = 0;
 		iCalificacion = 0;
 		dSuma = 0;
 		dPromedio = 0;
 
-		archivoEntrada >> sMatricula >> iTrabajos;
+		archivoEntrada >> sMatricula >> iEntregados;
 
-		for(int n=0; n < iTrabajos; n++) {
-			iCalificacion = 0;
+		for(int n=0; n < iEntregados; n++) {
 			archivoEntrada >> iCalificacion;
 			dSuma = iCalificacion + dSuma;
 		}
 		dPromedio = dSuma/iTrabajos;
 
-		cout << sMatricula << " " << dPromedio << endl;
+		archivoSalida << sMatricula << " " << dPromedio << endl;
 	}
 
+	archivoEntrada.close();
 
 	return 0;
 }
