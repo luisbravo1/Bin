@@ -43,19 +43,10 @@ int main(){
 		}
 			
 			
+		x = (x + 1) % n;
+		y = (y-1 < 0 ? n-1 : y-1);
 
-			if (x < 0){
-				x = n - 1;
-			}
-			if (y >= n){
-				y = 0;
-			}
-			if (x >= n){
-				x = 0;
-			}
-			if (y < 0){
-				y = n - 1;
-			}
+		
 			num++;
 	for (int reng=0; reng < n; reng++) {
 		for (int col=0; col < n; col++)
