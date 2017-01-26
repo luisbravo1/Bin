@@ -4,18 +4,18 @@ using namespace std;
 
 int main(){
 
-	int N;
+	int N = 20;
 	int col,row;
 
 	cin >> N;
 	col = N / 2;
 	row = 0;
 	int col2,row2;
-
+	cout << "Procesando..." << endl;
 
 	
 	
-	int square[20][20] = { { } };
+	int square[99][99] = { {0} };
 
 	for (int i = 0; i < N*N; i++){
 
@@ -33,9 +33,9 @@ int main(){
 		row2 = row;	
 		}
 
-		
 
-		//Ingore this hsit dumb
+		
+	}
 
 		for (int a = 0; a < N; a++){
 			for (int b = 0; b < N; b++){
@@ -44,9 +44,6 @@ int main(){
 			cout << endl;
 		}
 		cout << endl;
-		
-	}
-
 
 
 }
