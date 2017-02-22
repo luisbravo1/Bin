@@ -17,14 +17,17 @@ void leerDatos(ifstream &archivoEntrada, ofstream &archivoSalida) {
 		//Loop para buscar el comienzo de la documentacion buscando el "/**"
 		do {
 			getline(archivoEntrada, sLinea);
-			//Break para salir del loop y terminar el programa
 			if (sLinea == "}")
 				n++;
 			if (n > 3)
-				//archivoSalida << "</body>" << endl;
-				//archivoSalida << "</html>" << endl;
-				exit(0);
+				break;
 		} while (sLinea != "/**");
+
+		if (n > 3) {
+			archivoSalida << "</body>" << endl;
+			archivoSalida << "</html>" << endl;
+			break;
+		}
 
 		//Una vez que se encuentra la documentacion empieza a buscar los elementos
 		while (sLinea != "*/") {
@@ -64,26 +67,30 @@ void leerDatos(ifstream &archivoEntrada, ofstream &archivoSalida) {
 }
 
 //Funcion para comenzar el archivo html con las tags iniciales
-void htmlStart(ofstream &archivoSalida) {
+void htmlStart(ofstream &archivoSalida, string sArchivo) {
 	archivoSalida << "<!DOCTYPE html>" << endl;
 	archivoSalida << "<html>" << endl;
 	archivoSalida << "<head>" << endl;
 	archivoSalida << "<title>" << endl;
-	archivoSalida << "Documentaci&oacute;n del archivo factorial.cpp" << endl;
+	archivoSalida << "Documentaci&oacute;n del archivo " << sArchivo << ".cpp" << endl;
 	archivoSalida << "</title>" << endl;
 	archivoSalida << "</head>" << endl;
 	archivoSalida << "<body>" << endl;
 }
 
 int main() {
+	string sArchivo;
+
+	cout << "Que archivo deseas seleccionar? ";
+	cin >> sArchivo;
 
 	ifstream archivoEntrada;
-	archivoEntrada.open("factorial.cpp");
+	archivoEntrada.open(sArchivo + ".cpp");
 
 	ofstream archivoSalida;
-	archivoSalida.open("factorial.html");
+	archivoSalida.open(sArchivo + ".html");
 
-	htmlStart(archivoSalida);
+	htmlStart(archivoSalida, sArchivo);
 	leerDatos(archivoEntrada, archivoSalida);
 
 	archivoEntrada.close();
