@@ -5,17 +5,28 @@
 
 using namespace std;
 
-void leerDatos(ifstream &archivoEntrada) {
+//Funcion para leer los datos del archivo factorial.cpp
+void leerDatos(ifstream &archivoEntrada, ofstream &archivoSalida) {
 	string sLinea, sElemento;
 	int iPos, iLargo, iTam, n=0;
-
 	string sProgName, sAuthor, sDate, sFuncName, sDesc, sParam, sReturn;
 
+	//Loop principal para conseguir las lineas de codigo del archivo
 	while (!archivoEntrada.eof()) {
+		n=0;
+		//Loop para buscar el comienzo de la documentacion buscando el "/**"
 		do {
 			getline(archivoEntrada, sLinea);
+			//Break para salir del loop y terminar el programa
+			if (sLinea == "}")
+				n++;
+			if (n > 3)
+				//archivoSalida << "</body>" << endl;
+				//archivoSalida << "</html>" << endl;
+				exit(0);
 		} while (sLinea != "/**");
 
+		//Una vez que se encuentra la documentacion empieza a buscar los elementos
 		while (sLinea != "*/") {
 			getline(archivoEntrada, sLinea);
 			if (sLinea != "*/") {
@@ -24,32 +35,44 @@ void leerDatos(ifstream &archivoEntrada) {
 				sLinea.erase(0, iLargo);
 				iTam = sLinea.length();
 
+				//Identifica los elementos
 				if (sElemento == "progName ") {
 					sProgName = sLinea.substr(1, iTam);
-					cout << "Programa: " << sProgName << endl;
+					archivoSalida << "<h2> Programa: " << sProgName << "</h2>" << endl;
 				} else if (sElemento == "author ") {
 					sAuthor = sLinea.substr(1, iTam);
-					cout << "Autor: " << sAuthor << endl;
+					archivoSalida << "<strong> Autor: </strong>" << sAuthor << "<br>" <<endl;
 				} else if (sElemento == "date ") {
 					sDate = sLinea.substr(1, iTam);
-					cout << "Fecha de elaboracion: " << sDate << endl;
+					archivoSalida << "<strong> Fecha de elaboracion: </strong>" << sDate << "<br>" << endl;
 				} else if (sElemento == "funcName ") {
 					sFuncName = sLinea.substr(1, iTam);
-					cout << "Funcion: " << sFuncName << endl;
+					archivoSalida << "<h3><hr><br> Funcion: " << sFuncName << "<br></h3>" << endl;
 				} else if (sElemento == "desc ") {
 					sDesc = sLinea.substr(1, iTam);
-					cout << "Descripcion: " << sDesc << endl;
+					archivoSalida << "<strong> Descripcion: </strong>" << sDesc << "<br>" << endl;
 				} else if (sElemento == "param ") {
 					sParam = sLinea.substr(1, iTam);
-					cout << "Parametros: " << sParam << endl;
+					archivoSalida << "<strong> Parametros: </strong>" << sParam << "<br>" << endl;
 				} else if (sElemento == "return ") {
 					sReturn = sLinea.substr(1, iTam);
-					cout << "Valor de retorno: " << sReturn << endl;
+					archivoSalida << "<strong> Valor de retorno: </strong>" << sReturn << "<br>" << endl;
 				}
 			}
 		}
-		cout << endl;
 	} 
+}
+
+//Funcion para comenzar el archivo html con las tags iniciales
+void htmlStart(ofstream &archivoSalida) {
+	archivoSalida << "<!DOCTYPE html>" << endl;
+	archivoSalida << "<html>" << endl;
+	archivoSalida << "<head>" << endl;
+	archivoSalida << "<title>" << endl;
+	archivoSalida << "Documentaci&oacute;n del archivo factorial.cpp" << endl;
+	archivoSalida << "</title>" << endl;
+	archivoSalida << "</head>" << endl;
+	archivoSalida << "<body>" << endl;
 }
 
 int main() {
@@ -59,8 +82,9 @@ int main() {
 
 	ofstream archivoSalida;
 	archivoSalida.open("factorial.html");
-	
-	leerDatos(archivoEntrada);
+
+	htmlStart(archivoSalida);
+	leerDatos(archivoEntrada, archivoSalida);
 
 	archivoEntrada.close();
 
