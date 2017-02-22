@@ -7,7 +7,7 @@ using namespace std;
 
 void leerDatos(ifstream &archivoEntrada) {
 	string sLinea, sElemento;
-	int iPos, iLargo, iTam;
+	int iPos, iLargo, iTam, n=0;
 
 	string sProgName, sAuthor, sDate, sFuncName, sDesc, sParam, sReturn;
 
@@ -56,6 +56,9 @@ int main() {
 
 	ifstream archivoEntrada;
 	archivoEntrada.open("factorial.cpp");
+
+	ofstream archivoSalida;
+	archivoSalida.open("factorial.html");
 	
 	leerDatos(archivoEntrada);
 
