@@ -47,35 +47,24 @@ void Carrera::avanza() {
 	posT = tortuga.getPosicion()+1;
 	posL = liebre.getPosicion()+1;
 
-	if (posT == posL)
+	if (posT == posL) {
 		if ((posT != 1) && (posL != 1))
 			cout << "OUCH!!!" << endl;
+	}
 
-	if (posT < 71) {
-		arrTortuga[posT] = "T";
-		tortuga.numRandom();
-	} else if (posT > 71) 
-		posT = 70;
-		ganador();
+	arrTortuga[posT] = "T";
+	tortuga.numRandom();
 
-	if (posL < 71) {
-		arrLiebre[posL] = "L";
-		liebre.numRandom();
-	} else if (posL > 71)
-		posL = 70;
-		ganador();
+	arrLiebre[posL] = "L";
+	liebre.numRandom();
 }
 
 bool Carrera::ganador() {
 	if (posT >= 70) {
-		arrTortuga[70] = "T";
-		mostrarPista();
 		cout << "LA TORTUGA GANA!!! YAY!!!" << endl;
 		return true;
 	}
 	if (posL >= 70) {
-		arrLiebre[70] = "L";
-		mostrarPista();
 		cout << "La liebre gana. Que mal." << endl;
 		return true;
 	}

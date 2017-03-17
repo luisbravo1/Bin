@@ -50,8 +50,8 @@ void Liebre::pequeResbalon() {
 void Liebre::limite() {
 	if (posicion < 1)
 		posicion = 1;
-	if (posicion > 71)
-		posicion = 71;
+	if (posicion > 70)
+		posicion = 69;
 }
 
 int Liebre::getPosicion() {
