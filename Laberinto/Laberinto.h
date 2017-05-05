@@ -15,8 +15,8 @@ class Laberinto {
 
 	public:
 		Laberinto();
+		//virtual ~Laberinto();
 		void setLaberinto(istream&);
-		void printLaberinto();
 
 };
 
@@ -46,17 +46,5 @@ void Laberinto::setLaberinto(istream &archivo) {
 	}
 
 	//delete [] laberinto;
-
 }
-
-void Laberinto::printLaberinto() {
-	for(int ren=0; ren < size; ren++) {
-		for(int col=0; col < size; col++) {
-			cout << laberinto[ren][col];
-		}
-		cout << endl;
-	}
-}
-
-
 
