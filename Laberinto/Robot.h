@@ -14,6 +14,7 @@ class Robot {
 		int posInicial;
 		int posX;
 		int posY;
+		bool back;
 
 	public:
 		Robot();
@@ -30,6 +31,7 @@ class Robot {
 Robot::Robot() {
 	//MAX = 10;
 	//laberinto = new char[MAX];
+	back=false;
 }
 
 void Robot::setLaberinto(istream &archivo) {
@@ -47,8 +49,6 @@ void Robot::setLaberinto(istream &archivo) {
 	for(int ren=0; ren < size; ren++) {
 		for(int col=0; col < size; col++) {
 			archivo >> laberinto[ren][col];
-			if(laberinto[ren][col] == '-')
-				laberinto[ren][col] = ' ';
 		}
 	}
 
@@ -59,16 +59,17 @@ void Robot::setLaberinto(istream &archivo) {
 }
 
 void Robot::print() {
+	laberinto[posY][posX] = 'R';
 	for(int ren=0; ren < size; ren++) {
 		for(int col=0; col < size; col++) {
-			cout << laberinto[ren][col];
-			if (laberinto[ren][col]=='R')
-				laberinto[ren][col] = 'V';
+			if (laberinto[ren][col]=='r' || laberinto[ren][col]=='-' || laberinto[ren][col]=='V')
+				cout << " ";
+			else
+				cout << laberinto[ren][col];
 		}
 		cout << endl;
 	}
-
-	laberinto[posY][posX] = 'R';
+	laberinto[posY][posX] = 'V';
 }
 
 char Robot::der() {
@@ -90,22 +91,50 @@ char Robot::arriba() {
 char Robot::avanzar() {
 	int x = posX;
 	int y = posY;
+	int stuck;
 
-	if (der()==' ')
-		posX++;
-	else if (abajo()==' ')
-		posY++;
-	else if (izq()==' ')
-		posX--;
-	else if (arriba()==' ')
-		posY--; 
-	else if (der()!=' ') {
-		laberinto[posY][posX] = '-';
-		posX--;
+
+	if (der()=='X')
+		stuck++;
+	if (izq()=='X')
+		stuck++;
+	if (arriba()=='X')
+		stuck++;
+	if (abajo()=='X')
+		stuck++;
+
+	if (stuck >= 3)
+		back = true;
+
+
+	if (!back) {
+		if (der()=='-')
+			posX++;
+		else if (abajo()=='-')
+			posY++;
+		else if (izq()=='-')
+			posX--;
+		else if (arriba()=='-')
+			posY--; 
+	} else {
+		laberinto[posY][posX] = 'r';
+		if (der()=='V')
+			posX++;
+		else if (abajo()=='V')
+			posY++;
+		else if (izq()=='V')
+			posX--;
+		else if (arriba()=='V')
+			posY--;
+
+		if (der()=='-' || abajo()=='-' || izq()=='-' || arriba()=='-')
+			back=false;
 	}
 
+	if (der()=='S' || abajo()=='S' || izq()=='S' || arriba()=='S')
+		return 'S';
 
-	return laberinto[y][x];
+	return 'N';
 }
 
 

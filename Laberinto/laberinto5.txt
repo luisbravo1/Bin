@@ -1,0 +1,22 @@
+20 La dimension del laberinto es 20x20
+1 La posicion inicial del robot es (1,0)
+XXXXXXXXXXXXXXXXXXXX
+I----XXXXX-----XXXXX
+-XXXXXXXXX-XXXXXXXXX
+-XXXXXX------------X
+-X------XXXX-XXX-XXX
+----XXXX-----XXX-XXX
+X--XXXX-XX-------XXX
+X--XXXX----XX-XXXXXX
+X-------XXXX------XX
+X-XXXXXXXXXXXXXXXX-X
+X-XXX----XX--------X
+X-----XXXXXXXXXXXX-X
+XX-XXX---XX--X-----X
+XX-X-XXXX------XXXXX
+XX---XX-----XX----XX
+XXXX--X-XX---X--XXXX
+XXX---X-XX-XX--X---X
+XXX---X-XX--XX---X-S
+XXX-----XXX---XX-XXX
+XXXXXXX------XXX-XXX
