@@ -1,10 +1,14 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+using namespace std;
 
 #include "Laberinto.h"
 #include "Robot.h"
-#include <cstdlib>
 
 
-using namespace std;
+
 
 int main() {
 	ifstream archivo;
@@ -15,11 +19,11 @@ int main() {
 	Robot robot;
 
 	archivo.open("laberinto.txt");
-	robot.setLaberinto(archivo);
+	laberinto.setLaberinto(archivo);
 	archivo.close();
 	do {
 		system("clear");
-		robot.print();
+		laberinto.print();
 		cout << "Presiona ENTER para continuar.";
 		getline(cin, enter);
 		casilla = robot.avanzar();

@@ -1,24 +1,18 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-using namespace std;
+#ifndef Robot_H
+#define Robot_H
 
-//#define MAX 40
 
 class Robot {
 	private:
-		//int MAX;
-		//char *laberinto;
-		char laberinto[20][20];
+		char claberinto[20][20];
 		int size;
-		int posInicial;
-		int posX;
-		int posY;
 		bool back;
+		int posY;
+		int posX;
+		Laberinto laberinto;
 
 	public:
 		Robot();
-		void setLaberinto(istream&);
 		void print();
 		char der();
 		char abajo();
@@ -29,63 +23,29 @@ class Robot {
 };
 
 Robot::Robot() {
-	//MAX = 10;
-	//laberinto = new char[MAX];
 	back=false;
-}
-
-void Robot::setLaberinto(istream &archivo) {
-	string linea;
-
-	for(int i=0; i<2; i++) {
-		getline(archivo, linea);
-		linea = linea.substr(0,2);
-		if (i==0)
-			size = atoi(linea.c_str());
-		else
-			posInicial = atoi(linea.c_str());
-	}
-
-	for(int ren=0; ren < size; ren++) {
-		for(int col=0; col < size; col++) {
-			archivo >> laberinto[ren][col];
-		}
-	}
-
-	posX = posInicial;
+	posX = laberinto.getPosX();
 	posY = 1;
-	//delete [] laberinto;
-
 }
 
 void Robot::print() {
-	laberinto[posY][posX] = 'R';
-	for(int ren=0; ren < size; ren++) {
-		for(int col=0; col < size; col++) {
-			if (laberinto[ren][col]=='r' || laberinto[ren][col]=='-' || laberinto[ren][col]=='V')
-				cout << " ";
-			else
-				cout << laberinto[ren][col];
-		}
-		cout << endl;
-	}
-	laberinto[posY][posX] = 'V';
+	laberinto.print();
 }
 
 char Robot::der() {
-	return laberinto[posY][posX+1];
+	return laberinto.getChar(posX+1, posY); //laberinto[posY][posX+1];
 }
 
 char Robot::abajo() {
-	return laberinto[posY+1][posX];
+	return laberinto.getChar(posX, posY+1); //laberinto[posY+1][posX];
 }
 
 char Robot::izq() {
-	return laberinto[posY][posX-1];
+	return laberinto.getChar(posX-1, posY); //laberinto[posY][posX-1];
 }
 
 char Robot::arriba() {
-	return laberinto[posY-1][posX];
+	return laberinto.getChar(posX, posY-1); //laberinto[posY-1][posX];
 }
 
 char Robot::avanzar() {
@@ -117,7 +77,7 @@ char Robot::avanzar() {
 		else if (arriba()=='-')
 			posY--; 
 	} else {
-		laberinto[posY][posX] = 'r';
+		claberinto[posY][posX] = 'r';
 		if (der()=='V')
 			posX++;
 		else if (abajo()=='V')
@@ -137,6 +97,7 @@ char Robot::avanzar() {
 	return 'N';
 }
 
+#endif
 
 
 
